@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wortfeld – Presseschau</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 py-10 px-4">
+  
+  <div class="max-w-5xl mx-auto">
+   <div class="flex justify-between items-center mb-6">
+  <div>
+    <h1 class="text-3xl font-bold">Wortfeld: Presseschau</h1>
+    <a href="/projekt_wortfeld.html" class="text-sm text-blue-600 hover:underline">Über das Projekt</a>
+  </div>
+  <span class="text-sm text-gray-500">{{ articles | length }} Artikel</span>
+</div>
+{% if tag_filter %}
+  <div class="mb-4 text-sm text-gray-700">
+    🔎 Gefiltert nach: 
+    <span class="font-semibold">{{ tag_filter }}</span>
+    — <a href="/" class="text-blue-600 underline">Zurücksetzen</a>
+  </div>
+{% endif %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+      <!-- Projektbeschreibung als erste Karte -->
+      <div class="bg-white shadow-md rounded-2xl p-6 flex flex-col justify-between h-full">
+        <div>
+          <h2 class="text-xl font-semibold mb-2">
+            <a href="/projekt_wortfeld.html" class="hover:underline">Projekt: Wortfeld</a>
+          </h2>
+          <p class="text-gray-800 mb-4">
+            Einfacher Prototyp zur Verarbeitung deutschsprachiger Nachrichtenartikel. 
+            Enthält NLP-Pipeline mit spaCy, TF-IDF, Google NLP und Visualisierung per FastAPI + Jinja2.
+          </p>
+        </div>
+        <div class="text-sm text-gray-600">
+          <a href="/projekt_wortfeld.html" class="text-blue-600 hover:underline">Mehr über das Projekt →</a>
+        </div>
+      </div>
+      
+      {% for article in articles %}
+
+        <div class="bg-white shadow-md rounded-2xl p-6 flex flex-col justify-between h-full">
+          <div>
+            
+            <h2 class="text-xl font-semibold mb-2"> <a href="/article/{{ article._id }}"> {{ article.title }} </h2>
+            
+            <p class="text-gray-800 mb-4">{{ article.text_preview | truncate(300) }}</a></p>
+          </div>
+          <div>
+
+            <div class="flex flex-wrap gap-2 text-sm">
+              {% for tag in article.preview_tags %}
+                {% set is_active = tag.text == tag_filter %}
+                {% if tag.color == "green" %}
+                  <a href="/?tag={{ tag.text }}" class="px-2 py-0.5 rounded-full hover:underline 
+                     {{ 'bg-green-300 ring-2 ring-green-600 text-green-900' if is_active else 'bg-green-200 text-green-800' }}">
+                    {{ tag.text }}
+                  </a>
+                {% elif tag.color == "blue" %}
+                  <a href="/?tag={{ tag.text }}" class="px-2 py-0.5 rounded-full hover:underline 
+                     {{ 'bg-blue-300 ring-2 ring-blue-600 text-blue-900' if is_active else 'bg-blue-200 text-blue-800' }}">
+                    {{ tag.text }}
+                  </a>
+                {% else %}
+                  <a href="/?tag={{ tag.text }}" class="px-2 py-0.5 rounded-full hover:underline 
+                     {{ 'bg-gray-400 ring-2 ring-gray-700 text-gray-900' if is_active else 'bg-gray-300 text-gray-900' }}">
+                    {{ tag.text }}
+                  </a>
+                {% endif %}
+              {% endfor %}
+          </div>
+            
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+
+</html>

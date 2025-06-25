@@ -1,0 +1,93 @@
+<!-- templates/article.html -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ article.title }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 py-10 px-4">
+
+  <div class="max-w-3xl mx-auto">
+    <a href="/" class="text-sm text-blue-600 hover:underline flex items-center mb-6">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+    <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L3.414 8H17a1 1 0 110 2H3.414l3.293 3.293a1 1 0 01-1.414 1.414z" clip-rule="evenodd" />
+  </svg>
+  Zurück zur Übersicht
+</a>
+    <h1 class="text-3xl font-bold mb-2">{{ article.title }}</h1>
+    <p class="text-sm text-gray-600 mb-6">{{ article.date.strftime('%d.%m.%Y') }}</p>
+
+    <!-- Tags -->
+    <p class="flex items-center text-xl font-semibold text-gray-800 mt-10 mb-2">Tags : </p>
+    <div class="flex flex-wrap gap-2 mb-10">
+      {% for tag in article.keyword_overlap.topics %}
+        <span class="bg-green-200 text-green-800 px-2 py-0.5 rounded-full text-sm">{{ tag }}</span>
+      {% endfor %}
+      {% for tag in article.keyword_overlap.atlas %}
+        <span class="bg-blue-200 text-blue-800 px-2 py-0.5 rounded-full text-sm">{{ tag }}</span>
+      {% endfor %}
+      {% for tag in article.keyword_overlap.unique %}
+        <span class="bg-gray-300 text-gray-900 px-2 py-0.5 rounded-full text-sm">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    <!-- Hinweis zu Tags -->
+      <p class="text-xs text-gray-500 mt-2">
+    🟩 TF-IDF & Thema · 🟦 TF-IDF & Atlas-Kategorie · ⬜ Neu durch TF-IDF bestimmt
+  </p>
+      
+      <p class="flex items-center text-xl font-semibold text-gray-800 mt-10 mb-2">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+  Google NLP Analyse
+</p>
+<details class="text-xs text-gray-500 mt-1">
+  <summary class="cursor-pointer underline decoration-dotted">Was ist Google NLP?</summary>
+  <p>Diese Entitäten wurden mit der Google Natural Language API automatisch extrahiert – basierend auf ihrer Salienz im Text.</p>
+</details>
+  <div class="space-y-1 text-sm">
+
+    {% if google_nlp.persons %}
+    <div>
+      <span class="font-bold text-gray-900">Personen:</span>
+      {{ google_nlp.persons | join(', ') }}
+    </div>
+    {% endif %}
+
+    {% if google_nlp.organizations %}
+    <div>
+      <span class="font-bold text-gray-900">Organisationen:</span>
+      {{ google_nlp.organizations | join(', ') }}
+    </div>
+    {% endif %}
+
+    {% if google_nlp.locations %}
+    <div>
+      <span class="font-bold text-gray-900">Orte:</span>
+      {{ google_nlp.locations | join(', ') }}
+    </div>
+    {% endif %}
+
+  </div>
+
+    <!-- Text -->
+    <p class="flex items-center text-xl font-semibold text-gray-800 mt-10 mb-2">Artikeltext : </p>
+    <div class="prose prose-sm max-w-none">
+      <p>{{ article.text }}</p>
+    </div>
+    <hr class="my-10">
+<h2 class="text-lg font-bold mt-10 mb-2 text-gray-800">Über dieses Projekt</h2>
+<div class="text-sm text-gray-700 space-y-2">
+  <p>Dieses Projekt entstand aus praktischer Arbeit zur Analyse deutschsprachiger Nachrichten im Rahmen eines Medienmonitoring-Systems.</p>
+  <p>Der <strong>ausgewertete Korpus</strong> besteht aus 96 Artikeln von <strong>Tagesschau.de</strong>, ausgewählt aus einem Gesamtbestand von über 11.000 Artikeln zur besseren Übersichtlichkeit.</p>
+  <p><strong>Tags:</strong> Kombination aus automatisch erkannten Schlüsselbegriffen (⬜), Treffern zu vordefinierten Themen (🟩) und geografischen Kategorien aus einem Orts-Atlas (🟦).</p>
+  <p><strong>Google NLP Analyse:</strong> Personen, Organisationen und Orte wurden automatisch durch die <em>Google Natural Language API</em> extrahiert, gewichtet nach ihrer <em>Salienz</em> im Text.</p>
+</div>
+
+  </div>
+<footer class="text-xs text-gray-400 text-center mt-16 mb-4">
+  Erstellt mit Python · FastAPI · MongoDB · spaCy · Google NLP · Jinja2 · TailwindCSS
+</footer>
+</body>
+</html>
