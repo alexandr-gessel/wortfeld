@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pymongo
+jinja2
+python-dotenv
+spacy<3.7.0
+blis<0.8.0
+numpy<2.0.0
