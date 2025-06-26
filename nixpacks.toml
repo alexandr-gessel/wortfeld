@@ -5,9 +5,8 @@ nixPkgs = ["python3", "gcc", "libffi", "openssl", "pkg-config"]
 cmds = [
   "python -m venv /opt/venv",
   ". /opt/venv/bin/activate",
-  "pip install -r requirements.txt",
-  "chmod +x /app/start.sh"
+  "pip install -r requirements.txt"
 ]
 
 [phases.start]
-cmds = ["/app/start.sh"]
+cmds = ["/opt/venv/bin/uvicorn app.main:app --host=0.0.0.0 --port=8000"]
