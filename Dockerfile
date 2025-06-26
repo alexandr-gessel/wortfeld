@@ -5,7 +5,12 @@ RUN apt-get update && apt-get install -y \
     gcc \
     build-essential \
     libffi-dev \
+    libblas-dev \
+    liblapack-dev \
+    libpython3-dev \
+    python3-dev \
     git \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Python
