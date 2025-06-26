@@ -6,7 +6,8 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
 from datetime import datetime
-import re 
+import re
+from app.db import db
 
 load_dotenv()
 app = FastAPI()
