@@ -96,6 +96,17 @@ Die Anwendung ist erreichbar unter: [http://127.0.0.1:8000](http://127.0.0.1:800
     ├── load_articles.py
     ├── mongo_google_nlp.py
     └── tfidf_keywords.py
+
+Zentrale Skripte
+
+- `scripts/load_articles.py`  
+  Lädt Artikel aus `sampled_output.json`, bereinigt den Text, wendet `analyze_text()` an und speichert die Ergebnisse in MongoDB mit Feldern wie `title`, `date`, `atlas`, `topics`, `text`, `entities`, `noun_chunks`, `lemmas`.
+
+- `scripts/analyze.py`  
+  Führt eine spaCy-Analyse durch (POS-Tagging, Named Entities, Noun Chunks, Lemmata), filtert Stoppwörter und gibt eine strukturierte Analyse zurück.
+
+- `scripts/tfidf_keywords.py`  
+  Lädt alle Artikel aus MongoDB, erstellt ein Korpus aus Lemmata, Entitäten und Noun Chunks, berechnet TF-IDF-Schlüsselwörter und ergänzt jedes Dokument um `tfidf_keywords`.
 ```
 
 ## 📖 Weitere Informationen
