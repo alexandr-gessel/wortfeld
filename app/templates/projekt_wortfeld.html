@@ -15,9 +15,9 @@
       Zurück zur Übersicht
     </a>
 
-    <h1 class="text-3xl font-bold mb-8">Über das Projekt</h1>
+    <h1 class="text-2xl sm:text-3xl font-bold mb-8">Über das Projekt</h1>
 
-    <div class="space-y-6 text-sm text-gray-800">
+    <div class="space-y-6 text-base sm:text-sm text-gray-800 leading-relaxed">
       <p>
         Dieses Projekt entstand aus praktischer Erfahrung mit der Entwicklung eines Systems zur Beobachtung deutschsprachiger Nachrichtenquellen in einem Analysezentrum (2020–2021), wo ich als Backend-Entwickler tätig war. Damals bestand meine Aufgabe darin, den Prozess der Erhebung, Verarbeitung und Analyse von Nachrichten für Marketingkampagnen von Agrar-Exporteuren aus der GUS zu automatisieren.
       </p>
@@ -31,21 +31,21 @@
         Ziel des Projekts Wortfeld war es, einen einfachen, aber funktionierenden Prototyp für die Analyse deutschsprachiger Nachrichtenartikel am Beispiel von Tagesschau zu erstellen. Das Projekt dient als technisches Demonstrationsbeispiel für mein Portfolio als Python-Backend-Entwickler mit Schwerpunkt auf Textverarbeitung, FastAPI und MongoDB.
       </p>
 
-      <h2 class="text-xl font-semibold mt-8 mb-2">Was im MVP umgesetzt wurde</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold mb-8">Was im MVP umgesetzt wurde</h2>
       <p><strong>Korpus:</strong> Aus über 11.000 Artikeln auf Tagesschau.de wurden 96 Artikel manuell ausgewählt — etwa 8 bis 10 pro Monat. Diese Auswahl deckt rund 10 % des Gesamtbestands ab und gewährleistet Übersichtlichkeit und Vielfalt, ohne das System zu überladen.</p>
       <p><strong>Datenstrukturierung:</strong> Alle Texte wurden bereinigt, normalisiert und in MongoDB gespeichert. Verwendete Felder sind: <code>title</code>, <code>date</code>, <code>atlas</code>, <code>topics</code>, <code>text</code>, <code>entities</code>, <code>noun_chunks</code>, <code>lemmas</code>, <code>tfidf_keywords</code>, <code>google_entities</code>.</p>
       <p><strong>NLP-Analyse (basierend auf spaCy):</strong> Tokenisierung, Lemmatisierung, Extraktion benannter Entitäten und Nominalgruppen, POS-Filterung, Entfernung von Stoppwörtern und Duplikaten.</p>
       <p><strong>TF-IDF:</strong> Schlüsselbegriffe wurden aus einer TF-IDF-Matrix extrahiert und als farbige Schlagwörter visualisiert (Themen, Geografie, neue Begriffe).</p>
       <p><strong>Google Natural Language API:</strong> Entitäten mit Typ (PERSON, LOCATION, ORGANIZATION), Salienz und ggf. Wikipedia-Link. Die Kategorien funktionieren auf Deutsch kaum, daher war die Nutzung dort ineffektiv. Die Entitäten hingegen waren nützlich für Analyse und Visualisierung.</p>
 
-      <h2 class="text-xl font-semibold mt-8 mb-2">Benutzeroberfläche</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold mb-8">Benutzeroberfläche</h2>
       <ul class="list-disc list-inside">
         <li>Startseite: Übersicht mit Titel, Datum, Quelle und Schlagwörtern</li>
         <li>Artikelseite: Volltext mit Analyseblöcken für Tags und Google NLP</li>
         <li>Infoblock „Über dieses Projekt“ am Ende jeder Artikelseite</li>
       </ul>
 
-      <h2 class="text-xl font-semibold mt-8 mb-2">Fazit</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold mb-8">Fazit</h2>
       <p>
         Wortfeld ist ein einfacher Prototyp, in dem ich den vollständigen Pipeline-Zyklus umgesetzt habe — von der Datenerhebung und Analyse bis zur Darstellung in einem Webinterface. Das Projekt zeigt, wie man einen Nachrichtenanalyse-Workflow für deutschsprachige Texte mit Bibliotheken wie spaCy, scikit-learn, FastAPI, Jinja2, MongoDB und externen Services wie Google NLP aufbauen kann.
       </p>
