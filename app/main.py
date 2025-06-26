@@ -119,4 +119,13 @@ def article_detail(request: Request, id: str):
         "google_nlp": doc.get("google_nlp", {})
     })
 
+# mongo atlas test
+@app.get("/test-db")
+def test_db_connection():
+    stats = db.command("dbstats")
+    return {
+        "db_name": DB_NAME,
+        "collections": db.list_collection_names(),
+        "storage_size_MB": round(stats["storageSize"] / 1024 / 1024, 2)
+    }
 
