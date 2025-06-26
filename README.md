@@ -98,7 +98,11 @@ Die Anwendung ist erreichbar unter: [http://127.0.0.1:8000](http://127.0.0.1:800
     └── tfidf_keywords.py
 ```
 
-## 📄 Weitere Informationen
+## 📖 Weitere Informationen
 
-Eine ausführliche Projektbeschreibung ist auf der Website verfügbar:  
+Eine kompakte Projektübersicht findest du auf der Portfolio-Website:  
 👉 [pythia.one/wortfeld](https://pythia.one/wortfeld)
+
+Die ausführliche Projektbeschreibung mit Methodik, Motivation und technischer Umsetzung  
+ist innerhalb der Anwendung verfügbar:  
+👉 [wortfeld.up.railway.app/projekt_wortfeld.html](https://wortfeld.up.railway.app/projekt_wortfeld.html)
