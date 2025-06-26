@@ -4,6 +4,7 @@ pymongo
 jinja2
 python-dotenv
 spacy<3.7.0
-https://github.com/explosion/spacy-models/releases/download/de_core_news_md-3.6.0/de_core_news_md-3.6.0-py3-none-any.whl
 blis<0.8.0
 numpy<2.0.0
+
+https://github.com/explosion/spacy-models/releases/download/de_core_news_md-3.6.0/de_core_news_md-3.6.0-py3-none-any.whl
