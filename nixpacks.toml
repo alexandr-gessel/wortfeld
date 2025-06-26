@@ -1,12 +1,5 @@
-[phases.setup]
-nixPkgs = ["python3", "gcc", "libffi", "openssl", "pkg-config"]
+[build]
+builder = "heroku/python"
 
-[phases.install]
-cmds = [
-  "python -m venv /opt/venv",
-  "/opt/venv/bin/pip install --upgrade pip",
-  "/opt/venv/bin/pip install -r requirements.txt"
-]
-
-[phases.start]
-cmds = ["/opt/venv/bin/uvicorn app.main:app --host=0.0.0.0 --port=8000"]
+[start]
+cmd = "uvicorn app.main:app --host=0.0.0.0 --port=8000"
