@@ -100,9 +100,12 @@ Die Anwendung ist erreichbar unter: [http://127.0.0.1:8000](http://127.0.0.1:800
 
 ## 📖 Weitere Informationen
 
-Eine kompakte Projektübersicht findest du auf der Portfolio-Website:  
+Diese GitHub-Seite ist als technische Referenz gedacht.
+
+Eine kompakte Projektübersicht findest du auf meinem Portfolio:  
 👉 [pythia.one/wortfeld](https://pythia.one/wortfeld)
 
-Die ausführliche Projektbeschreibung mit Methodik, Motivation und technischer Umsetzung  
+Die vollständige Projektbeschreibung mit Methodik, Motivation und Reflexion  
 ist innerhalb der Anwendung verfügbar:  
 👉 [wortfeld.up.railway.app/projekt_wortfeld.html](https://wortfeld.up.railway.app/projekt_wortfeld.html)
+
