@@ -1,6 +1,7 @@
 # Wortfeld
 
 **Wortfeld** ist ein FastAPI-Projekt zur Analyse und Visualisierung deutschsprachiger Nachrichtenartikel. Es kombiniert spaCy für linguistische Analyse, TF-IDF zur Extraktion von Schlüsselwörtern, MongoDB als Datenbank und Jinja2 für die Darstellung im Webinterface. Das Projekt bildet eine vollständige Verarbeitungskette ab – von der Datenerhebung und -strukturierung bis zur Anzeige der Analyseergebnisse.
+Eine ausführliche Projektbeschreibung ist auf der Website verfügbar: [https://pythia.one/wortfeld](https://pythia.one/wortfeld)
 
 ## 📌 Projektbeschreibung
 
