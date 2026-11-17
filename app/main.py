@@ -23,18 +23,18 @@ collection = db.articles
 
 @app.get("/projekt_wortfeld.html", response_class=HTMLResponse)
 async def projekt_wortfeld(request: Request):
-    return templates.TemplateResponse("projekt_wortfeld.html", {"request": request})
-    
+    return templates.TemplateResponse( request, "projekt_wortfeld.html")
+
 @app.get("/", response_class=HTMLResponse)
 def index(request: Request, tag: str = None):
     docs = list(collection.find().sort("date", -1))  # без .limit()
-    
+
     for doc in docs:
         doc["title"] = doc.get("title") or "Kein Titel"
         doc["date"] = datetime.strptime(doc.get("date", "1970-01-01T00:00:00"), "%Y-%m-%dT%H:%M:%S")
-        
+
         text_blocks = doc.get("text", [])
-        
+
         if isinstance(text_blocks, list):
             joined_text = " ".join(text_blocks)
         else:
@@ -62,17 +62,17 @@ def index(request: Request, tag: str = None):
 
 
 
-        doc["preview_tags"] = preview_tags 
+        doc["preview_tags"] = preview_tags
 
-        
+
 
     if tag:
         docs = [doc for doc in docs if tag in [t["text"] for t in doc["preview_tags"]]]
 
-        
+
         #print(doc["title"], "→", doc["text_preview"][:80])
-    
-    return templates.TemplateResponse("index.html", {"request": request, "articles": docs, "tag_filter": tag})
+
+    return templates.TemplateResponse(request, "index.html", {"articles": docs, "tag_filter": tag})
 
 @app.get("/article/{id}", response_class=HTMLResponse)
 def article_detail(request: Request, id: str):
@@ -82,7 +82,7 @@ def article_detail(request: Request, id: str):
 
     doc["title"] = doc.get("title") or "Kein Titel"
     doc["date"] = datetime.strptime(doc.get("date", "1970-01-01T00:00:00"), "%Y-%m-%dT%H:%M:%S")
-    
+
     # text
     text_blocks = doc.get("text", [])
     if isinstance(text_blocks, list):
@@ -93,7 +93,7 @@ def article_detail(request: Request, id: str):
     # tags
     doc["keyword_overlap"] = doc.get("keyword_overlap", {"topics": [], "atlas": [], "unique": []})
 
-    
+
     # Google NLP
     google_ents = doc.get("google_entities", [])
     categories = {
@@ -128,4 +128,3 @@ def test_db_connection():
         "collections": db.list_collection_names(),
         "storage_size_MB": round(stats["storageSize"] / 1024 / 1024, 2)
     }
-
