@@ -113,10 +113,12 @@ def article_detail(request: Request, id: str):
 
     doc["google_nlp"] = grouped
 
-    return templates.TemplateResponse("article.html", {
-        "request": request,
-        "article": doc,
-        "google_nlp": doc.get("google_nlp", {})
+    return templates.TemplateResponse(request, "article.html", {
+
+        "article": article,
+
+        "google_nlp": google_nlp,
+
     })
 
 # mongo atlas test
