@@ -78,7 +78,7 @@ def index(request: Request, tag: str = None):
 def article_detail(request: Request, id: str):
     doc = collection.find_one({"_id": ObjectId(id)})
     if not doc:
-        return templates.TemplateResponse("404.html", {"request": request}, status_code=404)
+        return templates.TemplateResponse(request, "404.html", status_code=404)
 
     doc["title"] = doc.get("title") or "Kein Titel"
     doc["date"] = datetime.strptime(doc.get("date", "1970-01-01T00:00:00"), "%Y-%m-%dT%H:%M:%S")
@@ -113,13 +113,9 @@ def article_detail(request: Request, id: str):
 
     doc["google_nlp"] = grouped
 
-    return templates.TemplateResponse(request, "article.html", {
-
-        "article": article,
-
-        "google_nlp": google_nlp,
-
-    })
+    return templates.TemplateResponse( request, "article.html", { "article": doc, "google_nlp": grouped,
+        },
+    )
 
 # mongo atlas test
 @app.get("/test-db")
