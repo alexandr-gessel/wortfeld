@@ -33,6 +33,7 @@
           <p class="text-gray-800 mb-4">
             Einfacher Prototyp zur Verarbeitung deutschsprachiger Nachrichtenartikel. 
             Enthält NLP-Pipeline mit spaCy, TF-IDF, Google NLP und Visualisierung per FastAPI + Jinja2.
+            Die Artikel können durch Anklicken der Tags nach Themen gefiltert werden.
           </p>
         </div>
         <div class="text-sm text-gray-600">
@@ -53,20 +54,15 @@
 
             <div class="flex flex-wrap gap-2 text-sm">
               {% for tag in article.preview_tags %}
-                {% set is_active = tag.text == tag_filter %}
-                {% if tag.color == "green" %}
-                  <a href="/?tag={{ tag.text }}" class="px-2 py-0.5 rounded-full hover:underline 
+                {% set is_active = tag.text == tag_filter and tag.category == category_filter %}
+                {% if tag.category == "topics" %}
+                  <a href="/?tag={{ tag.text | urlencode }}&amp;category=topics" class="px-2 py-0.5 rounded-full hover:underline
                      {{ 'bg-green-300 ring-2 ring-green-600 text-green-900' if is_active else 'bg-green-200 text-green-800' }}">
                     {{ tag.text }}
                   </a>
-                {% elif tag.color == "blue" %}
-                  <a href="/?tag={{ tag.text }}" class="px-2 py-0.5 rounded-full hover:underline 
-                     {{ 'bg-blue-300 ring-2 ring-blue-600 text-blue-900' if is_active else 'bg-blue-200 text-blue-800' }}">
-                    {{ tag.text }}
-                  </a>
                 {% else %}
-                  <a href="/?tag={{ tag.text }}" class="px-2 py-0.5 rounded-full hover:underline 
-                     {{ 'bg-gray-400 ring-2 ring-gray-700 text-gray-900' if is_active else 'bg-gray-300 text-gray-900' }}">
+                  <a href="/?tag={{ tag.text | urlencode }}&amp;category=atlas" class="px-2 py-0.5 rounded-full hover:underline
+                     {{ 'bg-blue-300 ring-2 ring-blue-600 text-blue-900' if is_active else 'bg-blue-200 text-blue-800' }}">
                     {{ tag.text }}
                   </a>
                 {% endif %}

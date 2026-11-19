@@ -26,7 +26,7 @@ async def projekt_wortfeld(request: Request):
     return templates.TemplateResponse( request, "projekt_wortfeld.html")
 
 @app.get("/", response_class=HTMLResponse)
-def index(request: Request, tag: str = None):
+def index(request: Request, tag: str = None, category: str = "topics"):
     docs = list(collection.find().sort("date", -1))  # без .limit()
 
     for doc in docs:
@@ -49,30 +49,19 @@ def index(request: Request, tag: str = None):
         doc["text_preview"] = preview
 
         # Tags
-        preview_tags = []
-        for t in doc.get("topics", [])[:3]:
-            preview_tags.append({"text": t, "color": "green"})
-
-        overlap = doc.get("keyword_overlap", {})
-        tfidf_tag = (overlap.get("topics") or overlap.get("atlas") or [])
-        if tfidf_tag:
-            tfidf = tfidf_tag[0]
-            if tfidf not in [t["text"] for t in preview_tags]:
-                preview_tags.append({"text": tfidf, "color": "blue"})
-
-
-
-        doc["preview_tags"] = preview_tags
-
-
+        topics = doc.get("topics", [])
+        atlas = doc.get("atlas", [])
+        doc["preview_tags"] = [
+            {"text": t, "category": "topics"} for t in topics[:2 if atlas else 3]
+        ] + [{"text": t, "category": "atlas"} for t in atlas[:1]]
 
     if tag:
-        docs = [doc for doc in docs if tag in [t["text"] for t in doc["preview_tags"]]]
+        docs = [doc for doc in docs if category in ("topics", "atlas") and tag in doc.get(category, [])]
 
 
         #print(doc["title"], "→", doc["text_preview"][:80])
 
-    return templates.TemplateResponse(request, "index.html", {"articles": docs, "tag_filter": tag})
+    return templates.TemplateResponse(request, "index.html", {"articles": docs, "tag_filter": tag, "category_filter": category})
 
 @app.get("/article/{id}", response_class=HTMLResponse)
 def article_detail(request: Request, id: str):

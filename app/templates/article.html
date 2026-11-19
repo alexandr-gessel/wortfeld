@@ -33,9 +33,11 @@
       {% endfor %}
     </div>
     <!-- Hinweis zu Tags -->
-      <p class="text-xs text-gray-500 mt-2">
-    🟩 TF-IDF & Thema · 🟦 TF-IDF & Atlas-Kategorie · ⬜ Neu durch TF-IDF bestimmt
-  </p>
+    <div class="flex flex-wrap gap-2 mt-2">
+      <span class="bg-green-200 text-green-800 px-2 py-0.5 rounded-full text-sm">TF-IDF &amp; Thema</span>
+      <span class="bg-blue-200 text-blue-800 px-2 py-0.5 rounded-full text-sm">TF-IDF &amp; Atlas-Kategorie</span>
+      <span class="bg-gray-300 text-gray-900 px-2 py-0.5 rounded-full text-sm">Weitere TF-IDF-Schlüsselwörter</span>
+    </div>
       
       <p class="flex items-center text-xl font-semibold text-gray-800 mt-10 mb-2">
   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
